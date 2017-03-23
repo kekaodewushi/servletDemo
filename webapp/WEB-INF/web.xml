@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+    <!--编码格式-->
+    <filter>
+        <filter-name>Set Character Encoding</filter-name>
+        <filter-class>filter.SetEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>Set Character Encoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--安全过滤，防止sql注入,XSS攻击-->
+    <filter>
+        <filter-name>SQLFilter</filter-name>
+        <filter-class>filter.SQLFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SQLFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>XSSFilter</filter-name>
+        <filter-class>filter.XSSFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>XSSFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--日志服务-->
+    <servlet>
+        <servlet-name>Log4jInit</servlet-name>
+        <servlet-class>init.Log4jInit</servlet-class>
+        <init-param>
+            <param-name>log4j</param-name>
+            <param-value>WEB-INF\config\log4j.properties</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Log4jInit</servlet-name>
+        <url-pattern>/servlet/Log4jInit</url-pattern>
+    </servlet-mapping>
+
+    <!--业务-->
+    <servlet>
+        <servlet-name>hello_world</servlet-name>
+        <servlet-class>servlet.HelloServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>hello_world</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>login</servlet-name>
+        <servlet-class>servlet.LoginIn</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>login</servlet-name>
+        <url-pattern>/servlet/login</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
+</web-app>
