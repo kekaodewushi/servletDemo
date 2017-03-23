@@ -1,2 +1,5 @@
 # servletDemo
-servletDemo
+想了解一下Spring的原理，于是就先恶补一下servlet，
+自己用servlet建了一个简单的WEB项目，实现页面后台数据库的的交互，标准的MVC项目。
+一个项目怎么能没有日志呢，于是用log4j简单实现了日志功能。
+既然是WEB项目，标准的安全验证还是要有的，就内置了防止sql注入和跨站脚本攻击的处理。
